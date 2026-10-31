@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ec" />
+    <title>ตากหลาดนัด — แผนที่มีชีวิตของตลาด</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/index.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="ตากหลาดนัด หน้าแรก"><span class="brand-mark">ต.</span><span>ตากหลาด<span class="brand-light">นัด</span></span></a>
+        <nav class="main-nav" aria-label="เมนูหลัก">
+          <button class="nav-link active" data-view="customer">เดินตลาด <span>↗</span></button>
+          <button class="nav-link" data-view="shop">พื้นที่ร้านค้า</button>
+        </nav>
+        <button id="account-button" class="account-button">เข้าสู่ระบบร้านค้า <span>↗</span></button>
+      </header>
+
+      <main>
+        <section id="customer-view" class="view customer-view">
+          <div class="hero">
+            <div class="hero-copy">
+              <p class="eyebrow"><span class="live-dot"></span> ตลาดนัดของชุมชน · เปิดดูได้ทุกคน</p>
+              <h1>ตลาดดี ๆ<br /><em>เดินแล้วเจอ</em></h1>
+              <p class="hero-text">เดินดูร้านก่อนออกจากบ้าน วางแผนมาหาของอร่อย ของทำมือ และผู้คนที่อยากเจอ</p>
+              <div class="market-picker">
+                <label for="market-select">เลือกตลาด</label>
+                <select id="market-select"><option value="">กำลังโหลดตลาด...</option></select>
+                <span class="select-arrow">⌄</span>
+              </div>
+              <div id="market-meta" class="market-meta">กำลังเชื่อมต่อตลาด...</div>
+              <div class="market-facts" aria-label="ข้อมูลตลาด"><div><span class="fact-icon">⌖</span><span><small>สถานที่</small><strong id="market-address">รอข้อมูลตลาด</strong></span></div><div><span class="fact-icon">◷</span><span><small>เวลาเปิด</small><strong id="market-hours">ดูรอบตลาดด้านล่าง</strong></span></div><div><span class="fact-icon">✦</span><span><small>บรรยากาศ</small><strong id="market-description">ตลาดชุมชนของเรา</strong></span></div></div>
+            </div>
+            <div class="hero-art" aria-label="ภาพประกอบแผงร้านในตลาด">
+              <div class="sun-disc"></div><div class="art-note note-top">ของกิน · ของทำมือ · ของโปรด</div>
+              <div class="awning awning-one"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="stall stall-one"><span class="stall-sign">ครัวบ้านเรา</span><div class="counter"><b>●</b><b>●</b><b>●</b></div></div>
+              <div class="awning awning-two"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="stall stall-two"><span class="stall-sign">ดอกไม้ริมทาง</span><div class="flowers">✿　✿　✿</div></div>
+              <div class="art-note note-bottom">เดินช้า ๆ แล้วจะเจอของดี</div>
+            </div>
+          </div>
+
+          <section class="market-section">
+            <div class="section-heading"><div><p class="eyebrow">THE MARKET MAP</p><h2>วันนี้มีอะไรน่าแวะ</h2></div><div id="session-switcher" class="session-switcher"></div></div>
+            <div class="market-brief"><span class="brief-symbol">✷</span><div><p class="eyebrow">MARKET NOTES</p><strong id="market-summary">เลือกตลาดเพื่อดูข้อมูล周邊และ營業時間</strong><small id="market-around">好逛的攤位，就在地圖上。</small></div><span class="brief-open"><i></i> 社區好日子</span></div>
+            <div class="map-tools"><label class="search-box"><span>⌕</span><input id="shop-search" type="search" placeholder="ค้นหาร้านหรือของที่อยากกิน" /></label><label class="category-label">ประเภท<select id="category-filter"><option value="">ทั้งหมด</option></select></label><div id="map-count" class="map-count">เลือกตลาดเพื่อดูแผนผัง</div></div>
+            <div class="market-layout">
+              <div id="market-map" class="market-map"><div class="empty-state">เลือกตลาดและวัน เพื่อเปิดแผนผัง</div></div>
+              <aside class="shop-panel"><div class="panel-heading"><div><p class="eyebrow">MARKET DIRECTORY</p><h3>ร้านในตลาด</h3></div><span id="shop-total" class="count-pill">0</span></div><div id="shop-list" class="shop-list"><div class="empty-copy">ร้านค้าจะแสดงที่นี่</div></div></aside>
+            </div>
+            <div class="live-ops-grid">
+              <section class="ops-card"><div class="panel-heading"><div><p class="eyebrow">TODAY'S STALL BOOKINGS</p><h3>ตารางจองแผงร้าน</h3></div><span id="booking-total" class="count-pill">0</span></div><div class="table-scroll"><table class="ops-table"><thead><tr><th>แผง</th><th>โซน</th><th>ร้านค้า</th><th>ประเภท</th><th>สถานะ</th></tr></thead><tbody id="public-booking-rows"><tr><td colspan="5">เลือกวันที่เพื่อดูข้อมูล</td></tr></tbody></table></div></section>
+              <section class="ops-card parking-card"><div class="panel-heading"><div><p class="eyebrow">GATE CONTROL · LIVE LOG</p><h3>รถเข้า-ออกตลาด</h3></div><span id="parking-current" class="count-pill">—</span></div><p class="parking-caption">คันในลานโดยประมาณ · รายการผ่านประตูล่าสุด</p><div class="table-scroll"><table class="ops-table"><thead><tr><th>เวลา</th><th>ทะเบียน / รถ</th><th>ประตู</th><th>รายการ</th></tr></thead><tbody id="parking-rows"><tr><td colspan="4">กำลังโหลดข้อมูล</td></tr></tbody></table></div></section>
+            </div>
+          </section>
+        </section>
+
+        <section id="shop-view" class="view shop-view hidden">
+          <div class="shop-heading"><div><p class="eyebrow">SELLER'S CORNER</p><h1>พื้นที่ของคน<br /><em>มีของอยากขาย</em></h1><p>จองแผงง่าย ๆ แล้วเตรียมตัวมาเจอลูกค้าในตลาด</p></div><div id="db-status" class="connection-badge"><span></span> กำลังตรวจระบบ</div></div>
+          <div id="auth-card" class="auth-card">
+            <div class="auth-tabs"><button class="auth-tab selected" data-auth="login">เข้าสู่ระบบ</button><button class="auth-tab" data-auth="register">สมัครร้านค้า</button></div>
+            <form id="auth-form">
+              <div id="register-fields" class="hidden"><label>ชื่อที่ใช้แสดง<input name="displayName" autocomplete="name" /></label><label>ชื่อร้าน<input name="shopName" /></label></div>
+              <label id="identifier-label">อีเมลหรือเบอร์โทรศัพท์<input name="identifier" autocomplete="username" required /></label>
+              <div id="register-contact" class="hidden"><label>อีเมล (เลือกกรอก)<input name="email" type="email" autocomplete="email" /></label><label>เบอร์โทรศัพท์ (เลือกกรอก)<input name="phone" autocomplete="tel" /></label></div>
+              <label>รหัสผ่าน<input name="password" type="password" minlength="8" autocomplete="current-password" required /></label>
+              <label id="category-field" class="hidden">ประเภทสินค้า<input name="category" /></label>
+              <button class="primary-button auth-submit" type="submit">เข้าสู่ระบบ <span>→</span></button>
+              <p id="auth-message" class="form-message" role="status"></p>
+            </form>
+          </div>
+          <div id="dashboard" class="dashboard hidden">
+            <div class="dashboard-head"><div><p class="eyebrow">ยินดีต้อนรับ</p><h2 id="shop-greeting">ร้านของคุณ</h2></div><button id="logout-button" class="quiet-button">ออกจากระบบ ↗</button></div>
+            <div class="dashboard-grid"><article class="booking-feature"><p class="eyebrow">NEXT MARKET DAY</p><h3 id="next-booking-title">ยังไม่มีรายการจอง</h3><p id="next-booking-detail">เลือกพื้นที่ว่างเพื่อเริ่มต้น</p><button class="primary-button" data-shop-action="book">จองพื้นที่ร้านค้า <span>→</span></button></article><article class="profile-card"><p class="eyebrow">YOUR SHOP</p><h3 id="profile-name">ข้อมูลร้าน</h3><p id="profile-description">เพิ่มข้อมูลร้านให้ลูกค้ารู้จัก</p><button class="text-button" data-shop-action="profile">แก้ไขข้อมูลร้าน ↗</button></article></div>
+            <section class="booking-section"><div class="section-heading"><div><p class="eyebrow">YOUR BOOKINGS</p><h2>การจองของฉัน</h2></div></div><div id="booking-list" class="booking-list"></div></section>
+            <section id="booking-tools" class="booking-tools hidden"><div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR SPOT</p><h2>เลือกพื้นที่ร้านค้า</h2></div><button class="quiet-button" data-shop-action="dashboard">กลับหน้าร้าน</button></div><div class="booking-filters"><select id="booking-market"><option value="">เลือกตลาด</option></select><select id="booking-session" disabled><option value="">เลือกวันตลาด</option></select></div><div id="booking-booths" class="booth-grid"></div></section>
+            <section id="profile-tools" class="profile-tools hidden"><div class="section-heading"><div><p class="eyebrow">SHOP DETAILS</p><h2>ข้อมูลร้านของคุณ</h2></div></div><form id="profile-form" class="profile-form"><label>ชื่อร้าน<input name="name" required /></label><label>ประเภทสินค้า<input name="category" /></label><label>เบอร์ติดต่อที่แสดงต่อลูกค้า<input name="contactPhone" /></label><label>คำแนะนำร้าน<textarea name="description" rows="3"></textarea></label><label>ชื่อผู้ใช้งาน<input name="displayName" required /></label><label>เบอร์โทรศัพท์บัญชี<input name="phone" /></label><button class="primary-button">บันทึกข้อมูล <span>→</span></button><p id="profile-message" class="form-message" role="status"></p></form></section>
+          </div>
+        </section>
+      </main>
+      <footer class="footer"><a class="brand footer-brand" href="/"><span class="brand-mark">ต.</span><span>ตากหลาด<span class="brand-light">นัด</span></span></a><span>ตลาดที่ดี เริ่มจากการได้เจอกัน</span><span id="status" class="footer-status">กำลังตรวจสอบระบบ</span></footer>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
